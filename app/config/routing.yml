@@ -1,0 +1,101 @@
+app_emmision:
+    resource: "@AppBundle/Controller/EmmisionController.php"
+    type:     annotation
+xl_user:
+    resource: "@XLUserBundle/Resources/config/routing.yml"
+    prefix:   /
+app_emmision:
+    resource: "@AppBundle/Controller/EmmisionController.php"
+    type:     annotation
+
+app_reponse_api:
+    resource: "@AppBundle/Controller/ReponseRESTController.php"
+    type:   rest
+    prefix:   /api
+
+app_client_api:
+    resource: "@AppBundle/Controller/ClientRESTController.php"
+    type:   rest
+    prefix:   /api
+app_shortcode_api:
+    resource: "@AppBundle/Controller/ShortCodeRESTController.php"
+    type:   rest
+    prefix:   /api
+
+app_question_api:
+    resource: "@AppBundle/Controller/QuestionRESTController.php"
+    type:   rest
+    prefix:   /api
+
+app_emmision_api:
+    resource: "@AppBundle/Controller/EmmisionRESTController.php"
+    type:   rest
+    prefix:   /api
+
+app_client:
+    resource: "@AppBundle/Controller/ClientController.php"
+    type:     annotation
+
+app_value_api:
+    resource: "@AppBundle/Controller/ValueRESTController.php"
+    type:   rest
+    prefix:   /api
+
+app_quiz:
+    resource: "@AppBundle/Controller/QuizController.php"
+    type:     annotation
+
+app_question:
+    resource: "@AppBundle/Controller/QuestionController.php"
+    type:     annotation
+
+app_quiz:
+    resource: "@AppBundle/Controller/QuizController.php"
+    type:     annotation
+
+app_quiz:
+    resource: "@AppBundle/Controller/QuizController.php"
+    type:     annotation
+
+app_quiz:
+    resource: "@AppBundle/Controller/QuizController.php"
+    type:     annotation
+
+app_question:
+    resource: "@AppBundle/Controller/QuestionController.php"
+    type:     annotation
+
+app_article:
+    resource: "@AppBundle/Controller/ArticleController.php"
+    type:     annotation
+
+app_service:
+    resource: "@AppBundle/Controller/ServiceController.php"
+    type:     annotation
+
+app_lot:
+    resource: "@AppBundle/Controller/LotController.php"
+    type:     annotation
+
+app_type_service:
+    resource: "@AppBundle/Controller/TypeServiceController.php"
+    type:     annotation
+
+app_short_code:
+    resource: "@AppBundle/Controller/ShortCodeController.php"
+    type:     annotation
+
+#backend:
+#    resource: "@BackendBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+logout:
+    path: /logout
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

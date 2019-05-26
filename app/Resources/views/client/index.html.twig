@@ -1,0 +1,146 @@
+{% extends '@App/Default/layout.html.twig' %}
+
+{% block title %}
+{{ parent() }} - client index
+{% endblock %}
+
+{% block body %}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2><a href="{{ path('client') }}">Client</a></h2>
+        </div>
+    </div>    
+<div class="col-md-3 pull-left">
+        
+    <!-- PAGE SIZE -->
+    <div class="pagination form-inline ">
+        <select class = "form-control"  onchange="window.location = this.value" >
+            <option value='{{ path('client', app.request.query.all|merge({'pcg_show': '10'})) }}' {% if app.request.get('pcg_show') == 10 %} selected {% endif %}>10</option>
+            <option value='{{ path('client', app.request.query.all|merge({'pcg_show': '20'})) }}' {% if app.request.get('pcg_show') == 20 %} selected {% endif %}>20</option>
+            <option value='{{ path('client', app.request.query.all|merge({'pcg_show': '50'})) }}' {% if app.request.get('pcg_show') == 50 %} selected {% endif %}>50</option>
+            <option value='{{ path('client', app.request.query.all|merge({'pcg_show': '100'})) }}' {% if app.request.get('pcg_show') == 100 %} selected {% endif %}>100</option>
+            <option value='{{ path('client', app.request.query.all|merge({'pcg_show': '500'})) }}' {% if app.request.get('pcg_show') == 500 %} selected {% endif %}>500</option>
+        </select>
+    </div>
+    <!-- END PAGE SIZE -->
+
+</div>
+
+
+<!-- FILTERING -->
+<div class="col-md-6">
+    <form action="{{ path('client') }}" method="get" >
+
+        <div class="input-group h3">
+
+            {{form_widget(filterForm.search, { 'attr': {'class': 'form-control'} })}}
+            {{form_rest(filterForm) }}
+
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+
+        </div>
+    </form>
+</div>
+<!-- END FILTERING -->            
+            
+            
+
+<div class="col-md-3">
+    </div>
+
+    <div class="col-md-12">
+        {%- if form_errors(filterForm) %}
+        <div class="alert alert-block alert-error fade in form-errors">
+            {{ form_errors(filterForm) }}
+        </div>
+        {% endif %}
+    </div>
+
+</div> <!-- /#top -->
+
+
+<div class="row">
+    <div class="col-md-12">
+        {% for type, flashMessages in app.session.flashbag.all() %} 
+        {% for flashMessage in flashMessages %}
+        <div class="alert alert-{{ type }}">
+            {{ flashMessage|raw }}
+        </div>
+         {% endfor %} 
+         {% endfor %} 
+    </div>
+</div>
+    
+
+<div class="row">
+
+        <div class="table-responsive col-md-12">
+            <table class="table table-striped table-hover table-bordered" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+
+                {% import "@App/Default/th_sortable.html.twig" as macros %}
+                            <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'client')}}</th>
+                            <th>{{macros.th_sortable('nom',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'client')}}</th>
+                            <th>{{macros.th_sortable('prenom',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'client')}}</th>
+                            <th>{{macros.th_sortable('numTel',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'client')}}</th>
+                            <th>{{macros.th_sortable('code',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'client')}}</th>
+                            <th>{{macros.th_sortable('dateInscription',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'client')}}</th>
+    
+                       
+                        <th width = "130px">List</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.nom }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.numTel }}</td>
+                        <td>{{ client.code }}</td>
+                        <td>{%- if client.dateInscription %}{{ client.dateInscription|date('Y-m-d H:i:s') }}{% endif %}</td>
+    
+                        <td class="actions">
+                            <a title='Show' class="btn btn-info btn-sm" href="{{ path('client_show', { 'id': client.id }) }}">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            </a>
+                        </td>
+
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+</div> <!-- /#list -->
+
+
+
+
+<div class="row">
+    <div class="col-md-4 pull-left">
+    </div>
+    
+    <div class='col-md-3 pagination text-center'>
+         <p>{{totalOfRecordsString}}</p>
+    </div>
+ 
+    <div class="col-md-5 text-right">
+         {{ pagerHtml|raw }} 
+    </div>
+</div> <!-- /#bottom -->
+
+
+
+{% endblock %}
+

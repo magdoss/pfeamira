@@ -1,0 +1,71 @@
+{% extends '@App/Default/layout.html.twig' %}
+
+{% block title %}
+{{ parent() }} - client
+{% endblock %}
+
+{% block body %}
+
+<div id="top" class="row">
+    <div class="page-header">
+        <h2>View client <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> </h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p><strong>Id</strong></p>
+        <p>
+            {{ client.id }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Nom</strong></p>
+        <p>
+            {{ client.nom }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Prenom</strong></p>
+        <p>
+            {{ client.prenom }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Numtel</strong></p>
+        <p>
+            {{ client.numTel }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Code</strong></p>
+        <p>
+            {{ client.code }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Dateinscription</strong></p>
+        <p>
+            {% if client.dateInscription %}{{ client.dateInscription|date('Y-m-d H:i:s') }}{% endif %}
+        </p>
+
+    </div></div>
+
+<hr/>
+
+
+<div class="form-group">
+    <a class="btn btn-default" href="{{ path('client') }}">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+        Back to list
+    </a>
+</div>
+
+
+{% endblock %}
+
