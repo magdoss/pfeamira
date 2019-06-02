@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\ShortCode;
-use AppBundle\Form\ShortCodeType;
+use AppBundle\Entity\Quiz;
+use AppBundle\Form\QuizType;
 
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
@@ -19,14 +19,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
 /**
- * ShortCode controller.
+ * Quiz controller.
  *
- * @RouteResource("ShortCode")
+ * @RouteResource("Quiz")
  */
-class ShortCodeRESTController extends VoryxController
+class QuizRESTController extends VoryxController
 {
     /**
-     * Get a ShortCode entity
+     * Get a Quiz entity
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -36,15 +36,15 @@ class ShortCodeRESTController extends VoryxController
      * @param Request $request
      * @param $entity
      *
-     * @return Response|ShortCode
+     * @return Response|Quiz
      */
-    public function getAction(Request $request, ShortCode $entity)
+    public function getAction(Request $request, Quiz $entity)
     {
         return $entity;
     }
 
     /**
-     * Get all ShortCode entities.
+     * Get all Quiz entities.
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -70,7 +70,7 @@ class ShortCodeRESTController extends VoryxController
             $filters = !is_null($paramFetcher->get('filters')) ? $paramFetcher->get('filters') : array();
 
             $em = $this->getDoctrine()->getManager();
-            $entities = $em->getRepository('AppBundle:ShortCode')->findBy($filters, $order_by, $limit, $offset);
+            $entities = $em->getRepository('AppBundle:Quiz')->findBy($filters, $order_by, $limit, $offset);
             if ($entities) {
                 return $entities;
             }
@@ -81,7 +81,7 @@ class ShortCodeRESTController extends VoryxController
     }
 
     /**
-     * Create a ShortCode entity.
+     * Create a Quiz entity.
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -91,12 +91,12 @@ class ShortCodeRESTController extends VoryxController
      *
      * @param Request $request
      *
-     * @return FOSView|Response|ShortCode
+     * @return FOSView|Response|Quiz
      */
     public function postAction(Request $request)
     {
-        $entity = new ShortCode();
-        $form = $this->createForm(ShortCodeType::class, $entity, array("method" => $request->getMethod()));
+        $entity = new Quiz();
+        $form = $this->createForm(QuizType::class, $entity, array("method" => $request->getMethod()));
         $this->removeExtraFields($request, $form);
         $form->handleRequest($request);
 
@@ -112,7 +112,7 @@ class ShortCodeRESTController extends VoryxController
     }
 
     /**
-     * Update a ShortCode entity.
+     * Update a Quiz entity.
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -122,14 +122,14 @@ class ShortCodeRESTController extends VoryxController
      * @param Request $request
      * @param $entity
      *
-     * @return FOSView|Response|ShortCode
+     * @return FOSView|Response|Quiz
      */
-    public function putAction(Request $request, ShortCode $entity)
+    public function putAction(Request $request, Quiz $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
             $request->setMethod('PATCH'); //Treat all PUTs as PATCH
-            $form = $this->createForm(ShortCodeType::class, $entity, array("method" => $request->getMethod()));
+            $form = $this->createForm(QuizType::class, $entity, array("method" => $request->getMethod()));
             $this->removeExtraFields($request, $form);
             $form->handleRequest($request);
 
@@ -146,7 +146,7 @@ class ShortCodeRESTController extends VoryxController
     }
 
     /**
-     * Partial Update to a ShortCode entity.
+     * Partial Update to a Quiz entity.
      *
      * @View(serializerEnableMaxDepthChecks=true)
      *
@@ -155,13 +155,13 @@ class ShortCodeRESTController extends VoryxController
      *
      * @return Response
      */
-    public function patchAction(Request $request, ShortCode $entity)
+    public function patchAction(Request $request, Quiz $entity)
     {
         return $this->putAction($request, $entity);
     }
 
     /**
-     * Delete a ShortCode entity.
+     * Delete a Quiz entity.
      *
      * @View(statusCode=204)
      *
@@ -170,7 +170,7 @@ class ShortCodeRESTController extends VoryxController
      *
      * @return FOSView|Response
      */
-    public function deleteAction(Request $request, ShortCode $entity)
+    public function deleteAction(Request $request, Quiz $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();

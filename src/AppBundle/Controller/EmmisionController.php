@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Service;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -143,6 +144,9 @@ class EmmisionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($emmision);
+            $service = new Service();
+            $service->setEmmision($emmision);
+            $em->persist($service);
             $em->flush();
             
             $editLink = $this->generateUrl('emmision_edit', array('id' => $emmision->getId()));

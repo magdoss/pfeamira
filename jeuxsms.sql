@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 26 mai 2019 à 15:03
+-- Généré le :  Dim 02 juin 2019 à 23:54
 -- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Version de PHP :  5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,22 +31,26 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `service_id` int(11) DEFAULT NULL,
-  `titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `short_code_id` int(11) DEFAULT NULL,
+  `libelle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci,
   `jsonConfig` longtext COLLATE utf8_unicode_ci COMMENT '(DC2Type:json_array)',
+  `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_creation` date NOT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date NOT NULL,
+  `price` double DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_23A0E66ED5CA9E6` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `IDX_23A0E668C7B29BF` (`short_code_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
-INSERT INTO `article` (`id`, `service_id`, `titre`, `description`, `jsonConfig`) VALUES
-(1, 1, 'pizza', 'pizaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '\"{\\r\\n  \\\"menu\\\": [\\r\\n    {\\\"key\\\":\\\"steps\\\",\\\"value\\\":\\\"\\u00e9tape\\\"},\\r\\n    {\\\"key\\\":\\\"ingredients\\\",\\\"value\\\":\\\"ingr\\u00e9dients\\\"},\\r\\n    {\\\"key\\\":\\\"value\\\",\\\"value\\\":\\\"valeur nutritive\\\"},\\r\\n    {\\\"key\\\":\\\"vdo\\\",\\\"value\\\":\\\"vid\\u00e9o\\\"}\\r\\n  ],\\r\\n  \\\"steps\\\":[ {\\r\\n    \\\"title\\\":\\\"etape 1\\\",\\r\\n    \\\"subTitle\\\":\\\"02:00 min\\\",\\r\\n    \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum\\\"\\r\\n  },{\\r\\n    \\\"title\\\":\\\"etape 2\\\",\\r\\n    \\\"subTitle\\\":\\\"04:00 min\\\",\\r\\n    \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod .\\\"\\r\\n  }],\\r\\n \\\"menu Key\\\": [{},{},{}]\\r\\n}\"'),
-(2, 1, 'rtdfghdhfhg', 'dgfhfghdfgh', '\"d<fdsf\"'),
-(3, 2, 'spagetti', 'bla bla bla', '\"{\\r\\n  \\\"menu\\\": [\\r\\n    {\\\"key\\\":\\\"steps\\\",\\\"value\\\":\\\"\\u00e9tape\\\"},\\r\\n    {\\\"key\\\":\\\"ingredients\\\",\\\"value\\\":\\\"ingr\\u00e9dients\\\"},\\r\\n    {\\\"key\\\":\\\"value\\\",\\\"value\\\":\\\"valeur nutritive\\\"},\\r\\n    {\\\"key\\\":\\\"vdo\\\",\\\"value\\\":\\\"vid\\u00e9o\\\"}\\r\\n  ],\\r\\n  \\\"steps\\\":[ {\\r\\n    \\\"title\\\":\\\"etape 1\\\",\\r\\n    \\\"subTitle\\\":\\\"02:00 min\\\",\\r\\n    \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum\\\"\\r\\n  },{\\r\\n    \\\"title\\\":\\\"etape 2\\\",\\r\\n    \\\"subTitle\\\":\\\"04:00 min\\\",\\r\\n    \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod .\\\"\\r\\n  }],\\r\\n \\\"menu Key\\\": [{},{},{}]\\r\\n}\"');
+INSERT INTO `article` (`id`, `short_code_id`, `libelle`, `description`, `jsonConfig`, `keyword`, `is_active`, `date_creation`, `date_debut`, `date_fin`, `price`) VALUES
+(5, 3, 'article 2', 'gefgdfg', '\"{ \\\"menu\\\": [ {\\\"key\\\":\\\"steps\\\",\\\"value\\\":\\\"\\u00e9tape\\\"}, {\\\"key\\\":\\\"ingredients\\\",\\\"value\\\":\\\"ingr\\u00e9dients\\\"}, {\\\"key\\\":\\\"value\\\",\\\"value\\\":\\\"valeur nutritive\\\"}, {\\\"key\\\":\\\"vdo\\\",\\\"value\\\":\\\"vid\\u00e9o\\\"} ], \\\"steps\\\":[ { \\\"title\\\":\\\"etape 1\\\", \\\"subTitle\\\":\\\"02:00 min\\\", \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum\\\" },{ \\\"title\\\":\\\"etape 2\\\", \\\"subTitle\\\":\\\"04:00 min\\\", \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod .\\\" }], \\\"menu Key\\\": [{},{},{}] }\"', 'a', 1, '2019-06-02', '2019-06-02', '2019-06-02', 1300);
 
 -- --------------------------------------------------------
 
@@ -74,20 +78,27 @@ CREATE TABLE IF NOT EXISTS `client` (
 DROP TABLE IF EXISTS `emmision`;
 CREATE TABLE IF NOT EXISTS `emmision` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `service_id` int(11) DEFAULT NULL,
-  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `short_code_id` int(11) DEFAULT NULL,
+  `libelle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `lot_id` int(11) DEFAULT NULL,
+  `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci,
+  `is_active` tinyint(1) NOT NULL,
+  `date_creation` date NOT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date NOT NULL,
+  `price` double DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_41E391C1ED5CA9E6` (`service_id`),
-  KEY `IDX_41E391C1A8CBA5F7` (`lot_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `IDX_41E391C1A8CBA5F7` (`lot_id`),
+  KEY `IDX_41E391C18C7B29BF` (`short_code_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `emmision`
 --
 
-INSERT INTO `emmision` (`id`, `service_id`, `nom`, `lot_id`) VALUES
-(1, 6, 'ebdelli show time', 1);
+INSERT INTO `emmision` (`id`, `short_code_id`, `libelle`, `lot_id`, `keyword`, `description`, `is_active`, `date_creation`, `date_debut`, `date_fin`, `price`) VALUES
+(2, 1, 'emmision extra', 1, 'ee', 'dsgsd', 1, '2019-06-02', '2019-06-02', '2019-06-02', 2000);
 
 -- --------------------------------------------------------
 
@@ -104,18 +115,14 @@ CREATE TABLE IF NOT EXISTS `image` (
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045F7294869C` (`article_id`),
   KEY `IDX_C53D045FA775319F` (`emmision_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
 --
 
 INSERT INTO `image` (`id`, `article_id`, `name`, `emmision_id`) VALUES
-(1, 1, 'e17e9d0f80bed0092b315807fa53af543cc5f473.jpeg', NULL),
-(2, 1, '69df3217fbbec4f5715e6e71193bc0207789b1c9.jpeg', NULL),
-(3, 3, '72074a718ea5bbed1466f633a2930f4887bdfaa2.jpeg', NULL),
-(4, 3, '18c7ff8cbb863dc2f966594bcd7b682112f0afdb.png', NULL),
-(5, NULL, 'eb7d2e22608fa62c903b246b14baa0bd7a0615bb.jpeg', 1);
+(6, NULL, '1e05069006cf0ea8e2f6c864f642ed4d277e4ea4.jpeg', 2);
 
 -- --------------------------------------------------------
 
@@ -181,16 +188,6 @@ CREATE TABLE IF NOT EXISTS `question` (
   KEY `IDX_B6F7494ECF18BB82` (`reponse_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Déchargement des données de la table `question`
---
-
-INSERT INTO `question` (`id`, `lang`, `question`, `prop1`, `prop2`, `isPropOneCorrect`, `pointToAdd`, `pointToSubIfFail`, `reponse_id`) VALUES
-(1, 'fr', 'quest 1', 'rep1', 'rep2', 1, 2, 1, NULL),
-(2, 'fr', 'quest 2', 'rep1', 'rep2', 0, 10, -3, NULL),
-(3, 'fr', 'quest 3', 'rep1', 'rep2', 1, 20, -10, NULL),
-(4, 'fr', 'quest 21', 'rep1', 'rep2', 0, 100, 20, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -222,21 +219,27 @@ INSERT INTO `question_quiz` (`question_id`, `quiz_id`) VALUES
 DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE IF NOT EXISTS `quiz` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `service_id` int(11) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `short_code_id` int(11) DEFAULT NULL,
+  `libelle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci,
+  `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_creation` date NOT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date NOT NULL,
+  `price` double DEFAULT NULL,
+  `lot_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_A412FA92ED5CA9E6` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `IDX_A412FA928C7B29BF` (`short_code_id`),
+  KEY `IDX_A412FA92A8CBA5F7` (`lot_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `quiz`
 --
 
-INSERT INTO `quiz` (`id`, `service_id`, `title`, `description`) VALUES
-(1, 1, 'dbara quiz', 'qrgqrg'),
-(2, 1, 'zqgqg', 'qsgesdg'),
-(3, 3, 'ttcash', 'jkbefophmqsflogjsgdmlh');
+INSERT INTO `quiz` (`id`, `short_code_id`, `libelle`, `description`, `keyword`, `is_active`, `date_creation`, `date_debut`, `date_fin`, `price`, `lot_id`) VALUES
+(4, 3, 'tt quiz', 'quiz tunisie', 'q', 1, '2019-06-02', '2019-06-02', '2019-06-02', 2000, NULL);
 
 -- --------------------------------------------------------
 
@@ -264,30 +267,23 @@ CREATE TABLE IF NOT EXISTS `reponse` (
 DROP TABLE IF EXISTS `service`;
 CREATE TABLE IF NOT EXISTS `service` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `short_code_id` int(11) DEFAULT NULL,
-  `libelle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `is_active` tinyint(1) NOT NULL,
-  `date_creation` date NOT NULL,
-  `date_debut` date NOT NULL,
-  `date_fin` date NOT NULL,
-  `price` double DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `article_id` int(11) DEFAULT NULL,
+  `quiz_id` int(11) DEFAULT NULL,
+  `emmision_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_E19D9AD28C7B29BF` (`short_code_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `UNIQ_E19D9AD27294869C` (`article_id`),
+  UNIQUE KEY `UNIQ_E19D9AD2853CD175` (`quiz_id`),
+  UNIQUE KEY `UNIQ_E19D9AD2A775319F` (`emmision_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `service`
 --
 
-INSERT INTO `service` (`id`, `short_code_id`, `libelle`, `keyword`, `description`, `is_active`, `date_creation`, `date_debut`, `date_fin`, `price`, `type`) VALUES
-(1, 1, 'dbara', 'D', 'dbaret lyoum', 0, '2019-05-19', '2014-01-01', '2014-01-01', 1200, ''),
-(2, 3, 'koujina', 'k', 'lkljhflqsdkjfqmsdlkgjom', 0, '2019-05-21', '2019-05-31', '2019-06-21', 2000, ''),
-(3, 1, 'quiz tt', 'ttcash', 'hrtfyguhiljomkjmhlgkjh', 1, '2019-05-21', '2019-05-21', '2019-05-21', 3000, 'emission'),
-(4, 1, 'sdsdgsg2222', 'rr', 'sdfghjklmlkjhgfhjklmmlkjghklm', 1, '2019-05-22', '2019-05-22', '2019-05-22', NULL, 'quiz'),
-(6, 3, 'test 21', 't21', 'yguhjklm*', 1, '2019-05-22', '2019-05-22', '2019-05-22', 1200, 'abonnement');
+INSERT INTO `service` (`id`, `article_id`, `quiz_id`, `emmision_id`) VALUES
+(8, NULL, NULL, 2),
+(9, 5, NULL, NULL),
+(10, NULL, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -359,14 +355,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `UNIQ_8D93D64992FC23A8` (`username_canonical`),
   UNIQUE KEY `UNIQ_8D93D649A0D96FBF` (`email_canonical`),
   UNIQUE KEY `UNIQ_8D93D649C05FB297` (`confirmation_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'admin', 'admin', 'admin@admin.tn', 'admin@admin.tn', 1, NULL, '$2y$13$4.PQOhme/v3k9jBT5W7MKOz3p5KNUEf/.U2aY/K8Cb4VPL.LIFK2W', '2019-05-26 14:51:37', NULL, NULL, 'a:0:{}');
+(1, 'admin', 'admin', 'admin@admin.tn', 'admin@admin.tn', 1, NULL, '$2y$13$4.PQOhme/v3k9jBT5W7MKOz3p5KNUEf/.U2aY/K8Cb4VPL.LIFK2W', '2019-05-26 14:51:37', NULL, NULL, 'a:0:{}'),
+(2, 'amira', 'amira', 'amira@amira.tn', 'amira@amira.tn', 1, NULL, '$2y$13$XRPMDKWT8FeJxRlAGybhI.2OkmOnRMk.QDr0KStQAL/G8q41szYZi', '2019-06-01 14:30:18', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
 
 -- --------------------------------------------------------
 
@@ -396,14 +393,14 @@ INSERT INTO `value` (`id`, `name`) VALUES
 -- Contraintes pour la table `article`
 --
 ALTER TABLE `article`
-  ADD CONSTRAINT `FK_23A0E66ED5CA9E6` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`);
+  ADD CONSTRAINT `FK_23A0E668C7B29BF` FOREIGN KEY (`short_code_id`) REFERENCES `short_code` (`id`);
 
 --
 -- Contraintes pour la table `emmision`
 --
 ALTER TABLE `emmision`
-  ADD CONSTRAINT `FK_41E391C1A8CBA5F7` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`),
-  ADD CONSTRAINT `FK_41E391C1ED5CA9E6` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`);
+  ADD CONSTRAINT `FK_41E391C18C7B29BF` FOREIGN KEY (`short_code_id`) REFERENCES `short_code` (`id`),
+  ADD CONSTRAINT `FK_41E391C1A8CBA5F7` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`);
 
 --
 -- Contraintes pour la table `image`
@@ -442,7 +439,8 @@ ALTER TABLE `question_quiz`
 -- Contraintes pour la table `quiz`
 --
 ALTER TABLE `quiz`
-  ADD CONSTRAINT `FK_A412FA92ED5CA9E6` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`);
+  ADD CONSTRAINT `FK_A412FA928C7B29BF` FOREIGN KEY (`short_code_id`) REFERENCES `short_code` (`id`),
+  ADD CONSTRAINT `FK_A412FA92A8CBA5F7` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`);
 
 --
 -- Contraintes pour la table `reponse`
@@ -454,7 +452,9 @@ ALTER TABLE `reponse`
 -- Contraintes pour la table `service`
 --
 ALTER TABLE `service`
-  ADD CONSTRAINT `FK_E19D9AD28C7B29BF` FOREIGN KEY (`short_code_id`) REFERENCES `short_code` (`id`);
+  ADD CONSTRAINT `FK_E19D9AD27294869C` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_E19D9AD2853CD175` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_E19D9AD2A775319F` FOREIGN KEY (`emmision_id`) REFERENCES `emmision` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

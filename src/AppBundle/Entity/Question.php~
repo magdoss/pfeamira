@@ -1,0 +1,306 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Question
+ *
+ * @ORM\Table(name="question")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\QuestionRepository")
+ */
+class Question
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lang", type="string", length=255)
+     */
+    private $lang;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="question", type="string", length=255)
+     */
+    private $question;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Quiz", inversedBy="questions")
+     * @ORM\JoinTable(name="question_quiz")
+     */
+    private $quiz;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prop1", type="string", length=255)
+     */
+    private $prop1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prop2", type="string", length=255)
+     */
+    private $prop2;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isPropOneCorrect", type="boolean")
+     */
+    private $isPropOneCorrect;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="pointToAdd", type="integer")
+     */
+    private $pointToAdd;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pointToSubIfFail", type="integer")
+     */
+    private $pointToSubIfFail;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Reponse", inversedBy="client")
+     */
+    private $reponse;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->quiz = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set lang
+     *
+     * @param string $lang
+     *
+     * @return Question
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Get lang
+     *
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
+     * Set question
+     *
+     * @param string $question
+     *
+     * @return Question
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return string
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set prop1
+     *
+     * @param string $prop1
+     *
+     * @return Question
+     */
+    public function setProp1($prop1)
+    {
+        $this->prop1 = $prop1;
+
+        return $this;
+    }
+
+    /**
+     * Get prop1
+     *
+     * @return string
+     */
+    public function getProp1()
+    {
+        return $this->prop1;
+    }
+
+    /**
+     * Set prop2
+     *
+     * @param string $prop2
+     *
+     * @return Question
+     */
+    public function setProp2($prop2)
+    {
+        $this->prop2 = $prop2;
+
+        return $this;
+    }
+
+    /**
+     * Get prop2
+     *
+     * @return string
+     */
+    public function getProp2()
+    {
+        return $this->prop2;
+    }
+
+    /**
+     * Set isPropOneCorrect
+     *
+     * @param boolean $isPropOneCorrect
+     *
+     * @return Question
+     */
+    public function setIsPropOneCorrect($isPropOneCorrect)
+    {
+        $this->isPropOneCorrect = $isPropOneCorrect;
+
+        return $this;
+    }
+
+    /**
+     * Get isPropOneCorrect
+     *
+     * @return boolean
+     */
+    public function getIsPropOneCorrect()
+    {
+        return $this->isPropOneCorrect;
+    }
+
+    /**
+     * Set pointToAdd
+     *
+     * @param integer $pointToAdd
+     *
+     * @return Question
+     */
+    public function setPointToAdd($pointToAdd)
+    {
+        $this->pointToAdd = $pointToAdd;
+
+        return $this;
+    }
+
+    /**
+     * Get pointToAdd
+     *
+     * @return integer
+     */
+    public function getPointToAdd()
+    {
+        return $this->pointToAdd;
+    }
+
+    /**
+     * Set pointToSubIfFail
+     *
+     * @param integer $pointToSubIfFail
+     *
+     * @return Question
+     */
+    public function setPointToSubIfFail($pointToSubIfFail)
+    {
+        $this->pointToSubIfFail = $pointToSubIfFail;
+
+        return $this;
+    }
+
+    /**
+     * Get pointToSubIfFail
+     *
+     * @return integer
+     */
+    public function getPointToSubIfFail()
+    {
+        return $this->pointToSubIfFail;
+    }
+
+    /**
+     * Add quiz
+     *
+     * @param \AppBundle\Entity\Quiz $quiz
+     *
+     * @return Question
+     */
+    public function addQuiz(\AppBundle\Entity\Quiz $quiz)
+    {
+        $this->quiz[] = $quiz;
+
+        return $this;
+    }
+
+    /**
+     * Remove quiz
+     *
+     * @param \AppBundle\Entity\Quiz $quiz
+     */
+    public function removeQuiz(\AppBundle\Entity\Quiz $quiz)
+    {
+        $this->quiz->removeElement($quiz);
+    }
+
+    /**
+     * Get quiz
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuiz()
+    {
+        return $this->quiz;
+    }
+}

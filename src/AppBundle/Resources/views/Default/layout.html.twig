@@ -82,81 +82,61 @@
 
                     <div class="menu_section">
 
-                        <ul class="nav side-menu" style="display: inline-block">
+                        <ul class="nav side-menu">
                             <li><a href="{{ path('shortcode') }}"><i class="fa fa-home"></i> Short code </a>
-                            <li><a href="{{ path('service') }}"><i class="fa fa-home"></i> Service </a>
-                            <li><a href="{{ path('quiz') }}"><i class="fa fa-home"></i> Quiz </a>
-                            <li><a href="{{ path('question') }}"><i class="fa fa-home"></i> Question </a>
+                                {#                            <li><a href="{{ path('service') }}"><i class="fa fa-home"></i> Service </a>#}
+
+
+                                {#                            <li><a href="{{ path('question') }}"><i class="fa fa-home"></i> Question </a>#}
                             <li><a href="{{ path('lot') }}"><i class="fa fa-home"></i> Lot </a>
-                            <li><a href="{{ path('emmision') }}"><i class="fa fa-home"></i> Emmision </a>
+                                {#                            <li><a href="{{ path('emmision') }}"><i class="fa fa-home"></i> Emmision </a>#}
                             <li><a href="{{ path('client') }}"><i class="fa fa-home"></i> Client </a>
                             <li><a href="{{ path('article') }}"><i class="fa fa-home"></i> article </a>
 
+                            <li><a href="{{ path('service') }}"><i class="fa fa-building"></i> Service<span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
 
-                                {#                            <li><a><i class="fa fa-users"></i> Gestion des clients <span#}
-                                {#                                            class="fa fa-chevron-down"></span></a>#}
-                                {#                                <ul class="nav child_menu" style="display: none">#}
+                                    <li style="display: none"><a href="{{ path('service') }}"> </a></li>
+                                    <li><a href="{{ path('article') }}"> Abonnement</a></li>
+                                    <li><a href="{{ path('emmision') }}"> Emmision </a></li>
+                                    <li><a href="{{ path('quiz') }}"> Quiz </a>
 
-                                {#                                    <li><a href="#">Liste des clients</a>#}
-                                {#                                    </li>#}
-                                {#                                    <li><a href="#">Clients en archive</a>#}
-                                {#                                    </li>#}
+                                        <ul class="nav child_menu">
 
+                                            <li><a href="{{ path('question') }}">Question</a>
+                                            </li>
+                                            <li style="display: none;"><a href="{{ path('quiz') }}"></a></li>
+                                            <li style="display: none"><a href="{{ path('service') }}"> Tousles
+                                                    services</a>
+                                            </li>
+                                        </ul>
 
-                                {#                                </ul>#}
-                                {#                            </li>#}
-                                {#                            <li><a><i class="fa fa-building"></i> Gestion des offres<span#}
-                                {#                                            class="fa fa-chevron-down"></span></a>#}
-                                {#                                <ul class="nav child_menu" style="display: none">#}
-                                {#                                    <li><a href="#"> Offre de vente</a>#}
-                                {#                                    </li>#}
-                                {#                                    <li><a href="#"> Offre de location </a>#}
-                                {#                                    </li>#}
-                                {#                                </ul>#}
-                                {#                            </li>#}
-                                {#                            <li><a><i class="fa fa-building"></i> Gestion des demandes <span#}
-                                {#                                            class="fa fa-chevron-down"></span></a>#}
-                                {#                                <ul class="nav child_menu" style="display: none">#}
-                                {#                                    <li><a href="#"> Demandes achat</a>#}
-                                {#                                    </li>#}
-                                {#                                    <li><a href="#"> Demandes de location </a>#}
-                                {#                                    </li>#}
-                                {#                                </ul>#}
-                                {#                            </li>#}
-                                {#                            <li><a><i class="fa fa-car"></i> Gestion des visites <span#}
-                                {#                                            class="fa fa-chevron-down"></span></a>#}
-                                {#                                <ul class="nav child_menu" style="display: none">#}
-                                {#                                    <li><a href="#">Visite de vente </a>#}
-                                {#                                    </li>#}
-                                {#                                    <li><a href="#">Visite de location</a>#}
-                                {#                                    </li>#}
-                                {#                                </ul>#}
-                                {#                            </li>#}
-                                {#                            <li><a><i class="fa fa-gears"></i> Parametres <span class="fa fa-chevron-down"></span></a>#}
-                                {#                                <ul class="nav child_menu" style="display: none">#}
-                                {#                                    <li><a href="#"> Configuration des regions </a>#}
-                                {#                                    </li>#}
+                                    </li>
+                                </ul>
+                            </li>
 
 
-                                {#                                    <li><a href="#"> Types des biens </a>#}
-                                {#                                    </li>#}
-
-
-                                {#                                    <li><a href="#"> Configuration des équipements </a>#}
-                                {#                                    </li>#}
-
-
-                                {#                                    <li><a href="#"> Configuration des villes </a>#}
-                                {#                                    </li>#}
-
-                                {#                                </ul>#}
-                                {#                            </li>#}
-
+                            {#                            <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>#}
+                            {#                                <ul class="nav child_menu">#}
+                            {#                                    <li><a href="">Level One</a>#}
+                            {#                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>#}
+                            {#                                        <ul class="nav child_menu">#}
+                            {#                                            <li class="sub_menu"><a href="">Level Two</a>#}
+                            {#                                            </li>#}
+                            {#                                            <li><a href="">Level Two</a>#}
+                            {#                                            </li>#}
+                            {#                                            <li><a href="">Level Two</a>#}
+                            {#                                            </li>#}
+                            {#                                        </ul>#}
+                            {#                                    </li>#}
+                            {#                                    <li><a href="">Level One</a>#}
+                            {#                                    </li>#}
+                            {#                                </ul>#}
+                            {#                            </li>#}
 
                         </ul>
                     </div>
-
-
                 </div>
                 <!-- /sidebar menu -->
 
@@ -226,7 +206,7 @@
 
                                     <div class="login-right">
 
-                                                                                {{ render(controller('XLUserBundle:ChangePassword:changePassword')) }}
+                                        {{ render(controller('XLUserBundle:ChangePassword:changePassword')) }}
 
                                     </div>
 

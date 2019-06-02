@@ -21,9 +21,58 @@
 
     </div>
     <div class="col-md-6">
-        <p><strong>Nom</strong></p>
+        <p><strong>Libelle</strong></p>
         <p>
-            {{ emmision.nom }}
+            {{ emmision.libelle }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Keyword</strong></p>
+        <p>
+            {{ emmision.keyword }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Description</strong></p>
+        <p>
+            {{ emmision.description }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Isactive</strong></p>
+        <p>
+            {% if emmision.isActive %}Yes{% else %}No{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Datecreation</strong></p>
+        <p>
+            {% if emmision.dateCreation %}{{ emmision.dateCreation|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Datedebut</strong></p>
+        <p>
+            {% if emmision.dateDebut %}{{ emmision.dateDebut|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Datefin</strong></p>
+        <p>
+            {% if emmision.dateFin %}{{ emmision.dateFin|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Price</strong></p>
+        <p>
+            {{ emmision.price }}
         </p>
 
     </div></div>

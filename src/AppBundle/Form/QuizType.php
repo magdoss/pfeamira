@@ -16,11 +16,25 @@ class QuizType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('libelle')
+            ->add('keyword')
             ->add('description')
-            ->add('service', EntityType::class, array(
-                'class' => 'AppBundle\Entity\Service',
-                'choice_label' => 'libelle',
+            ->add('isActive')
+            ->add('dateCreation')
+            ->add('dateDebut')
+            ->add('dateFin')
+            ->add('price')
+            ->add('lot', EntityType::class, array(
+                'class' => 'AppBundle\Entity\Lot',
+                'choice_label' => 'nom',
+                'placeholder' => 'Please choose',
+                'empty_data' => null,
+                'required' => false
+
+            ))
+            ->add('shortCode', EntityType::class, array(
+                'class' => 'AppBundle\Entity\ShortCode',
+                'choice_label' => 'code',
                 'placeholder' => 'Please choose',
                 'empty_data' => null,
                 'required' => false

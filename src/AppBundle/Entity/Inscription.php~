@@ -1,0 +1,46 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ClientService
+ *
+ * @ORM\Table(name="inscription")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\InscriptionRepository")
+ */
+class Inscription
+{
+    /**
+     * @ORM\Id()
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Client", inversedBy="inscription")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
+     */
+    private $client;
+
+    /**
+     * @ORM\Id()
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Service", inversedBy="inscription")
+     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=false)
+     */
+    private $service;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="score", type="string", length=255)
+     */
+    private $score;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isWinner", type="boolean", nullable=true)
+     */
+    private $isWinner;
+
+
+
+}
+

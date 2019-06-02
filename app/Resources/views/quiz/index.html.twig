@@ -91,10 +91,16 @@
                     <tr>
                         <th width="20px"><input type="checkbox" class="check-all" onclick="toggleAll(this)"></th>
 
-                {% import "@App/Default/th_sortable.html.twig" as macros %}
+                {% import "PetkoparaCrudGeneratorBundle::macros/th_sortable.html.twig" as macros %}
                             <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
-                            <th>{{macros.th_sortable('title',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
+                            <th>{{macros.th_sortable('libelle',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
+                            <th>{{macros.th_sortable('keyword',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
                             <th>{{macros.th_sortable('description',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
+                            <th>{{macros.th_sortable('isActive',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
+                            <th>{{macros.th_sortable('dateCreation',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
+                            <th>{{macros.th_sortable('dateDebut',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
+                            <th>{{macros.th_sortable('dateFin',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
+                            <th>{{macros.th_sortable('price',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'quiz')}}</th>
     
                        
                         <th width = "130px">List</th>
@@ -105,8 +111,14 @@
                     <tr>
                         <td><input type="checkbox" name="ids[]" onclick='bulkSubmitBtnManage();' class="check-all" value="{{quiz.id}}"/></td>
                         <td><a href="{{ path('quiz_edit', { 'id': quiz.id }) }}">{{ quiz.id }}</a></td>
-                        <td>{{ quiz.title }}</td>
+                        <td>{{ quiz.libelle }}</td>
+                        <td>{{ quiz.keyword }}</td>
                         <td>{{ quiz.description }}</td>
+                        <td>{%- if quiz.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>{%- if quiz.dateCreation %}{{ quiz.dateCreation|date('Y-m-d') }}{% endif %}</td>
+                        <td>{%- if quiz.dateDebut %}{{ quiz.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                        <td>{%- if quiz.dateFin %}{{ quiz.dateFin|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ quiz.price }}</td>
     
                         <td class="actions">
                             <a  onclick="return confirm('Are you sure!');" title="Delete" class="btn btn-danger btn-sm" href="{{ path('quiz_by_id_delete', { 'id': quiz.id}) }}">

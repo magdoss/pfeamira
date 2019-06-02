@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AppBundle\Entity\Image;
+use Symfony\Component\Validator\Constraints\Date;
 
 
 /**
@@ -16,31 +17,7 @@ use AppBundle\Entity\Image;
  */
 class Article
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-    /**
-     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Service")
-     */
-    private $service;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=255)
-     */
-    private $titre;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255)
-     */
-    private $description;
 
     /**
      * @var Image
@@ -57,17 +34,338 @@ class Article
      * @var ArrayCollection
      */
     private $files;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255)
+     */
+    private $libelle;
+
+
+    /**
+     *
+     *
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\ShortCode" )
+     */
+
+    private $shortCode;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="keyword", type="string")
+     */
+    private $keyword;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text",nullable=true)
+     */
+    private $description;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+    /**
+     * @var Date
+     *
+     * @ORM\Column(name="date_creation", type="date")
+     */
+    private $dateCreation;
+    /**
+     * @var Date
+     *
+     * @ORM\Column(name="date_debut", type="date")
+     */
+    private $dateDebut;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_fin", type="date")
+     */
+    private $dateFin;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="float", nullable=true)
+     */
+    private $price;
+
+
+
+
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime();
+        $this->dateDebut = new \DateTime();
+        $this->dateFin = new \DateTime();
+        $this->image = new ArrayCollection();
+    }
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
-
-    public function __construct()
+    public function getId()
     {
-        $this->image = new ArrayCollection();
+        return $this->id;
     }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return Service
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+//    /**
+//     * Set type
+//     *
+//     * @param string $type
+//     *
+//     * @return Service
+//     */
+//    public function setType($type)
+//    {
+//        $this->type = $type;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get type
+//     *
+//     * @return string
+//     */
+//    public function getType()
+//    {
+//        return $this->type;
+//    }
+
+    /**
+     * Set keyword
+     *
+     * @param string $keyword
+     *
+     * @return Service
+     */
+    public function setKeyword($keyword)
+    {
+        $this->keyword = $keyword;
+
+        return $this;
+    }
+
+    /**
+     * Get keyword
+     *
+     * @return string
+     */
+    public function getKeyword()
+    {
+        return $this->keyword;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Service
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Service
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     *
+     * @return Service
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     *
+     * @return Service
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     *
+     * @return Service
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Service
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set shortCode
+     *
+     * @param \AppBundle\Entity\ShortCode $shortCode
+     *
+     * @return Service
+     */
+    public function setShortCode(\AppBundle\Entity\ShortCode $shortCode = null)
+    {
+        $this->shortCode = $shortCode;
+
+        return $this;
+    }
+
+    /**
+     * Get shortCode
+     *
+     * @return \AppBundle\Entity\ShortCode
+     */
+    public function getShortCode()
+    {
+        return $this->shortCode;
+    }
+
+
+
 
     /**
      * @ORM\PreFlush()
@@ -88,31 +386,6 @@ class Article
                 unset($file);
             }
         }
-    }
-
-
-    /**
-     * Set service
-     *
-     * @param \AppBundle\Entity\Service $service
-     *
-     * @return Service
-     */
-    public function setService(\AppBundle\Entity\Service $service = null)
-    {
-        $this->service = $service;
-
-        return $this;
-    }
-
-    /**
-     * Get service
-     *
-     * @return \AppBundle\Entity\Service
-     */
-    public function getService()
-    {
-        return $this->service;
     }
 
 
@@ -156,58 +429,6 @@ class Article
         $this->image->removeElement($image);
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Article
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Article
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * Set image

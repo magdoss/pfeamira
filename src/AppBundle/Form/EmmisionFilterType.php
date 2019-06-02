@@ -17,7 +17,14 @@ class EmmisionFilterType extends AbstractType
                     'class' => 'AppBundle:Emmision',
                     'search_fields' => array( //optional, if it's empty it will search in the all entity columns
                         'id',
-                        'nom',
+                        'libelle',
+                        'keyword',
+                        'description',
+                        'isActive',
+                        'dateCreation',
+                        'dateDebut',
+                        'dateFin',
+                        'price',
                  ), 
                     ));
                     

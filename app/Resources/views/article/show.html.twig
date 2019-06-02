@@ -14,6 +14,13 @@
 
 <div class="row">
     <div class="col-md-6">
+        <p><strong>Jsonconfig</strong></p>
+        <p>
+            {{ article.jsonConfig }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
         <p><strong>Id</strong></p>
         <p>
             {{ article.id }}
@@ -21,9 +28,16 @@
 
     </div>
     <div class="col-md-6">
-        <p><strong>Titre</strong></p>
+        <p><strong>Libelle</strong></p>
         <p>
-            {{ article.titre }}
+            {{ article.libelle }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Keyword</strong></p>
+        <p>
+            {{ article.keyword }}
         </p>
 
     </div>
@@ -35,9 +49,37 @@
 
     </div>
     <div class="col-md-6">
-        <p><strong>Jsonconfig</strong></p>
+        <p><strong>Isactive</strong></p>
         <p>
-            {{ article.jsonConfig }}
+            {% if article.isActive %}Yes{% else %}No{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Datecreation</strong></p>
+        <p>
+            {% if article.dateCreation %}{{ article.dateCreation|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Datedebut</strong></p>
+        <p>
+            {% if article.dateDebut %}{{ article.dateDebut|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Datefin</strong></p>
+        <p>
+            {% if article.dateFin %}{{ article.dateFin|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Price</strong></p>
+        <p>
+            {{ article.price }}
         </p>
 
     </div></div>

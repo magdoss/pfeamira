@@ -1,0 +1,74 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Message
+ *
+ * @ORM\Table(name="message", indexes={@ORM\Index(name="fk_Message_Service1_idx", columns={"Service_id_Service"}), @ORM\Index(name="fk_Message_User1_idx", columns={"User_id_user"})})
+ * @ORM\Entity
+ */
+class Message
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_msg", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idMsg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contenu", type="text", length=65535, nullable=true)
+     */
+    private $contenu;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbCaractere", type="integer", nullable=true)
+     */
+    private $nbcaractere;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="date", nullable=true)
+     */
+    private $dateCreation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_envoi", type="date", nullable=true)
+     */
+    private $dateEnvoi;
+
+    /**
+     * @var \AppBundle\Entity\Service
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Service")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Service_id_Service", referencedColumnName="id_Service", unique=true)
+     * })
+     */
+    private $serviceService;
+
+    /**
+     * @var \AppBundle\Entity\User
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="User_id_user", referencedColumnName="id_user", unique=true)
+     * })
+     */
+    private $userUser;
+
+
+}
+

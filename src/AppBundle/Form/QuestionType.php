@@ -25,7 +25,7 @@ class QuestionType extends AbstractType
             ->add('pointToSubIfFail')
             ->add('quiz', EntityType::class, array(
                 'class' => 'AppBundle\Entity\Quiz',
-                'choice_label' => 'title',
+                'choice_label' => 'libelle',
 
                 'expanded' => true,
                 'multiple' => true

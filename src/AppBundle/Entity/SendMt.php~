@@ -1,0 +1,87 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SendMt
+ *
+ * @ORM\Table(name="send_mt", indexes={@ORM\Index(name="fk_Send_Mt_Client1_idx", columns={"Client_id_client"}), @ORM\Index(name="fk_Send_Mt_Service1_idx", columns={"Service_id_Service"}), @ORM\Index(name="fk_Send_Mt_MO1_idx", columns={"MO_id_mo"}), @ORM\Index(name="fk_Send_Mt_ShortCode1_idx", columns={"ShortCode_idShortCode"})})
+ * @ORM\Entity
+ */
+class SendMt
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idSend_mt", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idsendMt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contenu", type="text", length=65535, nullable=true)
+     */
+    private $contenu;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_recep", type="date", nullable=true)
+     */
+    private $dateRecep;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=255, nullable=true)
+     */
+    private $etat;
+
+    /**
+     * @var \AppBundle\Entity\Client
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Client_id_client", referencedColumnName="id_client", unique=true)
+     * })
+     */
+    private $clientClient;
+
+    /**
+     * @var \AppBundle\Entity\Mo
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Mo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="MO_id_mo", referencedColumnName="id_mo", unique=true)
+     * })
+     */
+    private $moMo;
+
+    /**
+     * @var \AppBundle\Entity\Service
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Service")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Service_id_Service", referencedColumnName="id_Service", unique=true)
+     * })
+     */
+    private $serviceService;
+
+    /**
+     * @var \AppBundle\Entity\Shortcode
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Shortcode")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ShortCode_idShortCode", referencedColumnName="idShortCode", unique=true)
+     * })
+     */
+    private $shortcodeshortcode;
+
+
+}
+

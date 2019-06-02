@@ -91,9 +91,16 @@
                     <tr>
                         <th width="20px"><input type="checkbox" class="check-all" onclick="toggleAll(this)"></th>
 
-                {% import "@App/Default/th_sortable.html.twig" as macros %}
+                {% import "PetkoparaCrudGeneratorBundle::macros/th_sortable.html.twig" as macros %}
                             <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
-                            <th>{{macros.th_sortable('nom',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('libelle',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('keyword',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('description',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('isActive',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('dateCreation',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('dateDebut',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('dateFin',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
+                            <th>{{macros.th_sortable('price',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'emmision')}}</th>
     
                        
                         <th width = "130px">List</th>
@@ -104,7 +111,14 @@
                     <tr>
                         <td><input type="checkbox" name="ids[]" onclick='bulkSubmitBtnManage();' class="check-all" value="{{emmision.id}}"/></td>
                         <td><a href="{{ path('emmision_edit', { 'id': emmision.id }) }}">{{ emmision.id }}</a></td>
-                        <td>{{ emmision.nom }}</td>
+                        <td>{{ emmision.libelle }}</td>
+                        <td>{{ emmision.keyword }}</td>
+                        <td>{{ emmision.description }}</td>
+                        <td>{%- if emmision.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>{%- if emmision.dateCreation %}{{ emmision.dateCreation|date('Y-m-d') }}{% endif %}</td>
+                        <td>{%- if emmision.dateDebut %}{{ emmision.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                        <td>{%- if emmision.dateFin %}{{ emmision.dateFin|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ emmision.price }}</td>
     
                         <td class="actions">
                             <a  onclick="return confirm('Are you sure!');" title="Delete" class="btn btn-danger btn-sm" href="{{ path('emmision_by_id_delete', { 'id': emmision.id}) }}">

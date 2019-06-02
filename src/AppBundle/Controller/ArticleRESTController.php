@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Value;
-use AppBundle\Form\ValueType;
+use AppBundle\Entity\Article;
+use AppBundle\Form\ArticleType;
 
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
@@ -19,14 +19,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Voryx\RESTGeneratorBundle\Controller\VoryxController;
 
 /**
- * Value controller.
+ * Article controller.
  *
- * @RouteResource("Value")
+ * @RouteResource("Article")
  */
-class ValueRESTController extends VoryxController
+class ArticleRESTController extends VoryxController
 {
     /**
-     * Get a Value entity
+     * Get a Article entity
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -36,15 +36,15 @@ class ValueRESTController extends VoryxController
      * @param Request $request
      * @param $entity
      *
-     * @return Response|Value
+     * @return Response|Article
      */
-    public function getAction(Request $request, Value $entity)
+    public function getAction(Request $request, Article $entity)
     {
         return $entity;
     }
 
     /**
-     * Get all Value entities.
+     * Get all Article entities.
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -70,7 +70,7 @@ class ValueRESTController extends VoryxController
             $filters = !is_null($paramFetcher->get('filters')) ? $paramFetcher->get('filters') : array();
 
             $em = $this->getDoctrine()->getManager();
-            $entities = $em->getRepository('AppBundle:Value')->findBy($filters, $order_by, $limit, $offset);
+            $entities = $em->getRepository('AppBundle:Article')->findBy($filters, $order_by, $limit, $offset);
             if ($entities) {
                 return $entities;
             }
@@ -81,7 +81,7 @@ class ValueRESTController extends VoryxController
     }
 
     /**
-     * Create a Value entity.
+     * Create a Article entity.
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -91,12 +91,12 @@ class ValueRESTController extends VoryxController
      *
      * @param Request $request
      *
-     * @return FOSView|Response|Value
+     * @return FOSView|Response|Article
      */
     public function postAction(Request $request)
     {
-        $entity = new Value();
-        $form = $this->createForm(ValueType::class, $entity, array("method" => $request->getMethod()));
+        $entity = new Article();
+        $form = $this->createForm(ArticleType::class, $entity, array("method" => $request->getMethod()));
         $this->removeExtraFields($request, $form);
         $form->handleRequest($request);
 
@@ -112,7 +112,7 @@ class ValueRESTController extends VoryxController
     }
 
     /**
-     * Update a Value entity.
+     * Update a Article entity.
      *
      * @View(
      *   serializerGroups={"Default"},
@@ -122,14 +122,14 @@ class ValueRESTController extends VoryxController
      * @param Request $request
      * @param $entity
      *
-     * @return FOSView|Response|Value
+     * @return FOSView|Response|Article
      */
-    public function putAction(Request $request, Value $entity)
+    public function putAction(Request $request, Article $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();
             $request->setMethod('PATCH'); //Treat all PUTs as PATCH
-            $form = $this->createForm(ValueType::class, $entity, array("method" => $request->getMethod()));
+            $form = $this->createForm(ArticleType::class, $entity, array("method" => $request->getMethod()));
             $this->removeExtraFields($request, $form);
             $form->handleRequest($request);
 
@@ -146,7 +146,7 @@ class ValueRESTController extends VoryxController
     }
 
     /**
-     * Partial Update to a Value entity.
+     * Partial Update to a Article entity.
      *
      * @View(serializerEnableMaxDepthChecks=true)
      *
@@ -155,13 +155,13 @@ class ValueRESTController extends VoryxController
      *
      * @return Response
      */
-    public function patchAction(Request $request, Value $entity)
+    public function patchAction(Request $request, Article $entity)
     {
         return $this->putAction($request, $entity);
     }
 
     /**
-     * Delete a Value entity.
+     * Delete a Article entity.
      *
      * @View(statusCode=204)
      *
@@ -170,7 +170,7 @@ class ValueRESTController extends VoryxController
      *
      * @return FOSView|Response
      */
-    public function deleteAction(Request $request, Value $entity)
+    public function deleteAction(Request $request, Article $entity)
     {
         try {
             $em = $this->getDoctrine()->getManager();

@@ -1,0 +1,57 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Fichier
+ *
+ * @ORM\Table(name="fichier", indexes={@ORM\Index(name="fk_Fichier_User1_idx", columns={"User_id_user"})})
+ * @ORM\Entity
+ */
+class Fichier
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_fichier", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idFichier;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="date", nullable=true)
+     */
+    private $dateCreation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_supp", type="date", nullable=true)
+     */
+    private $dateSupp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var \AppBundle\Entity\User
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="User_id_user", referencedColumnName="id_user", unique=true)
+     * })
+     */
+    private $userUser;
+
+
+}
+

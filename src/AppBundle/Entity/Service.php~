@@ -142,28 +142,4 @@ class Service
     {
         return $this->quiz;
     }
-
-    /**
-     * Set emmision.
-     *
-     * @param \AppBundle\Entity\Emmision|null $emmision
-     *
-     * @return Service
-     */
-    public function setEmmision(\AppBundle\Entity\Emmision $emmision = null)
-    {
-        $this->emmision = $emmision;
-
-        return $this;
-    }
-
-    /**
-     * Get emmision.
-     *
-     * @return \AppBundle\Entity\Emmision|null
-     */
-    public function getEmmision()
-    {
-        return $this->emmision;
-    }
 }

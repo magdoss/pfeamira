@@ -17,31 +17,36 @@ class EmmisionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('service', EntityType::class, array(
-                'class' => 'AppBundle\Entity\Service',
-                'choice_label' => 'libelle',
-                'placeholder' => 'Please choose',
-                'empty_data' => null,
-                'required' => false
- 
-            )) 
+            ->add('libelle')
+            ->add('keyword')
+            ->add('description')
+            ->add('isActive')
+            ->add('dateCreation')
+            ->add('dateDebut')
+            ->add('dateFin')
+            ->add('price')
             ->add('lot', EntityType::class, array(
                 'class' => 'AppBundle\Entity\Lot',
                 'choice_label' => 'nom',
                 'placeholder' => 'Please choose',
                 'empty_data' => null,
-                'required' => false,
-//                'mapped' => false,
+                'required' => false
 
             ))
-            ->add('files',FileType::class ,array(
+            ->add('shortCode', EntityType::class, array(
+                'class' => 'AppBundle\Entity\ShortCode',
+                'choice_label' => 'code',
+                'placeholder' => 'Please choose',
+                'empty_data' => null,
+                'required' => false
+
+            ))
+            ->add('files', FileType::class, array(
                 'multiple' => true,
                 'required' => false
-            ))
-        ;
+            ));
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

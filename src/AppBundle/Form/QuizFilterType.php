@@ -17,8 +17,14 @@ class QuizFilterType extends AbstractType
                     'class' => 'AppBundle:Quiz',
                     'search_fields' => array( //optional, if it's empty it will search in the all entity columns
                         'id',
-                        'title',
+                        'libelle',
+                        'keyword',
                         'description',
+                        'isActive',
+                        'dateCreation',
+                        'dateDebut',
+                        'dateFin',
+                        'price',
                  ), 
                     ));
                     

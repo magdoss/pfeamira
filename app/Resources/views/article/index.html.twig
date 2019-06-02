@@ -1,4 +1,4 @@
-{% extends '@App/Default/layout.html.twig' %}
+{% extends '@App/Default/layout.html.twig'%}
 
 {% block title %}
 {{ parent() }} - article index
@@ -91,11 +91,17 @@
                     <tr>
                         <th width="20px"><input type="checkbox" class="check-all" onclick="toggleAll(this)"></th>
 
-                {% import "@App/Default/th_sortable.html.twig" as macros %}
-                            <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
-                            <th>{{macros.th_sortable('titre',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
-                            <th>{{macros.th_sortable('description',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                {% import "PetkoparaCrudGeneratorBundle::macros/th_sortable.html.twig" as macros %}
                             <th>{{macros.th_sortable('jsonConfig',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('libelle',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('keyword',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('description',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('isActive',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('dateCreation',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('dateDebut',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('dateFin',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
+                            <th>{{macros.th_sortable('price',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'article')}}</th>
     
                        
                         <th width = "130px">List</th>
@@ -105,10 +111,16 @@
                     {% for article in articles %}
                     <tr>
                         <td><input type="checkbox" name="ids[]" onclick='bulkSubmitBtnManage();' class="check-all" value="{{article.id}}"/></td>
-                        <td><a href="{{ path('article_edit', { 'id': article.id }) }}">{{ article.id }}</a></td>
-                        <td>{{ article.titre }}</td>
+                        <td><a href="{{ path('article_edit', { 'id': article.id }) }}">{{ article.jsonConfig }}</a></td>
+                        <td>{{ article.id }}</td>
+                        <td>{{ article.libelle }}</td>
+                        <td>{{ article.keyword }}</td>
                         <td>{{ article.description }}</td>
-                        <td>{{ article.jsonConfig }}</td>
+                        <td>{%- if article.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>{%- if article.dateCreation %}{{ article.dateCreation|date('Y-m-d') }}{% endif %}</td>
+                        <td>{%- if article.dateDebut %}{{ article.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                        <td>{%- if article.dateFin %}{{ article.dateFin|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ article.price }}</td>
     
                         <td class="actions">
                             <a  onclick="return confirm('Are you sure!');" title="Delete" class="btn btn-danger btn-sm" href="{{ path('article_by_id_delete', { 'id': article.id}) }}">

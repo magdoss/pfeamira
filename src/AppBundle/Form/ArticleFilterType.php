@@ -17,8 +17,14 @@ class ArticleFilterType extends AbstractType
                     'class' => 'AppBundle:Article',
                     'search_fields' => array( //optional, if it's empty it will search in the all entity columns
                         'id',
-                        'titre',
+                        'libelle',
+                        'keyword',
                         'description',
+                        'isActive',
+                        'dateCreation',
+                        'dateDebut',
+                        'dateFin',
+                        'price',
                  ), 
                     ));
                     

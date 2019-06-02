@@ -24,7 +24,7 @@ class Quiz
 
     /**
      * @var Lot
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Lot")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Lot", mappedBy="quiz")
      */
     private $lot;
 
@@ -32,7 +32,9 @@ class Quiz
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Question", mappedBy="quiz")
      *
      */
+
     private $questions;
+
 
     /**
      * @var string
@@ -140,38 +142,46 @@ class Quiz
     }
 
 
+
+
+
+
+
+
+
     /**
-     * Set lot
+     * Add lot
      *
      * @param \AppBundle\Entity\Lot $lot
      *
-     * @return Emmision
+     * @return Quiz
      */
-    public function setLot(\AppBundle\Entity\Lot $lot = null)
+    public function addLot(\AppBundle\Entity\Lot $lot)
     {
-        $this->lot = $lot;
+        $this->lot[] = $lot;
 
         return $this;
     }
 
     /**
+     * Remove lot
+     *
+     * @param \AppBundle\Entity\Lot $lot
+     */
+    public function removeLot(\AppBundle\Entity\Lot $lot)
+    {
+        $this->lot->removeElement($lot);
+    }
+
+    /**
      * Get lot
      *
-     * @return \AppBundle\Entity\Lot
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLot()
     {
         return $this->lot;
     }
-
-
-
-
-
-
-
-
-
 
     /**
      * Add question
@@ -205,197 +215,5 @@ class Quiz
     public function getQuestions()
     {
         return $this->questions;
-    }
-
-    /**
-     * Set keyword.
-     *
-     * @param string $keyword
-     *
-     * @return Quiz
-     */
-    public function setKeyword($keyword)
-    {
-        $this->keyword = $keyword;
-
-        return $this;
-    }
-
-    /**
-     * Get keyword.
-     *
-     * @return string
-     */
-    public function getKeyword()
-    {
-        return $this->keyword;
-    }
-
-    /**
-     * Set description.
-     *
-     * @param string|null $description
-     *
-     * @return Quiz
-     */
-    public function setDescription($description = null)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description.
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set isActive.
-     *
-     * @param bool $isActive
-     *
-     * @return Quiz
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive.
-     *
-     * @return bool
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * Set dateCreation.
-     *
-     * @param \DateTime $dateCreation
-     *
-     * @return Quiz
-     */
-    public function setDateCreation($dateCreation)
-    {
-        $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreation.
-     *
-     * @return \DateTime
-     */
-    public function getDateCreation()
-    {
-        return $this->dateCreation;
-    }
-
-    /**
-     * Set dateDebut.
-     *
-     * @param \DateTime $dateDebut
-     *
-     * @return Quiz
-     */
-    public function setDateDebut($dateDebut)
-    {
-        $this->dateDebut = $dateDebut;
-
-        return $this;
-    }
-
-    /**
-     * Get dateDebut.
-     *
-     * @return \DateTime
-     */
-    public function getDateDebut()
-    {
-        return $this->dateDebut;
-    }
-
-    /**
-     * Set dateFin.
-     *
-     * @param \DateTime $dateFin
-     *
-     * @return Quiz
-     */
-    public function setDateFin($dateFin)
-    {
-        $this->dateFin = $dateFin;
-
-        return $this;
-    }
-
-    /**
-     * Get dateFin.
-     *
-     * @return \DateTime
-     */
-    public function getDateFin()
-    {
-        return $this->dateFin;
-    }
-
-    /**
-     * Set price.
-     *
-     * @param float|null $price
-     *
-     * @return Quiz
-     */
-    public function setPrice($price = null)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price.
-     *
-     * @return float|null
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Set shortCode.
-     *
-     * @param \AppBundle\Entity\ShortCode|null $shortCode
-     *
-     * @return Quiz
-     */
-    public function setShortCode(\AppBundle\Entity\ShortCode $shortCode = null)
-    {
-        $this->shortCode = $shortCode;
-
-        return $this;
-    }
-
-    /**
-     * Get shortCode.
-     *
-     * @return \AppBundle\Entity\ShortCode|null
-     */
-    public function getShortCode()
-    {
-        return $this->shortCode;
     }
 }

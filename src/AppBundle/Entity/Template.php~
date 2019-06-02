@@ -1,0 +1,74 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Template
+ *
+ * @ORM\Table(name="template", indexes={@ORM\Index(name="fk_Template_Service1_idx", columns={"Service_id_Service"}), @ORM\Index(name="fk_Template_User1_idx", columns={"User_id_user"})})
+ * @ORM\Entity
+ */
+class Template
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_Template", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idTemplate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libellÃ©", type="string", length=255, nullable=true)
+     */
+    private $libellã©;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="langue", type="string", length=255, nullable=true)
+     */
+    private $langue;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="datetime", nullable=true)
+     */
+    private $dateCreation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_supp", type="datetime", nullable=true)
+     */
+    private $dateSupp;
+
+    /**
+     * @var \AppBundle\Entity\Service
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Service")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Service_id_Service", referencedColumnName="id_Service", unique=true)
+     * })
+     */
+    private $serviceService;
+
+    /**
+     * @var \AppBundle\Entity\User
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="User_id_user", referencedColumnName="id_user", unique=true)
+     * })
+     */
+    private $userUser;
+
+
+}
+

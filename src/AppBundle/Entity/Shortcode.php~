@@ -1,0 +1,55 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Shortcode
+ *
+ * @ORM\Table(name="shortcode")
+ * @ORM\Entity
+ */
+class Shortcode
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idShortCode", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idshortcode;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $prix;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Service", inversedBy="idshortcode")
+     * @ORM\JoinTable(name="shortcode_service",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="idShortCode", referencedColumnName="idShortCode")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="Service_id_Service", referencedColumnName="id_Service")
+     *   }
+     * )
+     */
+    private $serviceService;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->serviceService = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+
