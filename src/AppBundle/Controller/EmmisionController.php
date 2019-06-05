@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\View\TwitterBootstrap3View;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use AppBundle\Entity\Emmision;
 
@@ -33,7 +34,12 @@ class EmmisionController extends Controller
 
         list($filterForm, $queryBuilder) = $this->filter($queryBuilder, $request);
         list($emmisions, $pagerHtml) = $this->paginator($queryBuilder, $request);
-        
+        foreach ($emmisions as $emmision) {
+            $emmision->link = $this->generateUrl('emision_mobile', array('id' => $emmision->getId()), UrlGeneratorInterface::ABSOLUTE_URL);
+            ;
+//            dump($emmision);
+//            die;
+        }
         $totalOfRecordsString = $this->getTotalOfRecordsString($queryBuilder, $request);
 
         return $this->render('emmision/index.html.twig', array(
@@ -45,11 +51,31 @@ class EmmisionController extends Controller
         ));
     }
 
+    /**
+     * @Route("/mobile/{id}", name="emision_mobile")
+     * @Method("GET")
+     */
+    public function mobileAction(Request $request, Emmision $emmision)
+    {
+
+
+        if ($emmision->getImage()) {
+            $img = $emmision->getImage()[count($emmision->getImage()) - 1];
+        }
+        $shortCode = $emmision->getShortCode()->getCode();
+        $keyword = $emmision->getKeyword();
+        $prix = $emmision->getPrice();
+
+        return $this->render('emmision/mobile.html.twig', array("img" => $img
+        , "keyword" => $keyword, "shortCode" => $shortCode, "prix" => $prix
+        ));
+    }
+
 
     /**
-    * Create filter form and process filter request.
-    *
-    */
+     * Create filter form and process filter request.
+     *
+     */
     protected function filter($queryBuilder, $request)
     {
         $filterForm = $this->createForm('AppBundle\Form\EmmisionFilterType');
@@ -59,38 +85,37 @@ class EmmisionController extends Controller
 
         if ($filterForm->isValid()) {
             // Build the query from the given form object
-            $this->get('petkopara_multi_search.builder')->searchForm( $queryBuilder, $filterForm->get('search'));
+            $this->get('petkopara_multi_search.builder')->searchForm($queryBuilder, $filterForm->get('search'));
         }
 
         return array($filterForm, $queryBuilder);
     }
 
     /**
-    * Get results from paginator and get paginator view.
-    *
-    */
+     * Get results from paginator and get paginator view.
+     *
+     */
     protected function paginator($queryBuilder, Request $request)
     {
         //sorting
-        $sortCol = $queryBuilder->getRootAlias().'.'.$request->get('pcg_sort_col', 'id');
+        $sortCol = $queryBuilder->getRootAlias() . '.' . $request->get('pcg_sort_col', 'id');
         $queryBuilder->orderBy($sortCol, $request->get('pcg_sort_order', 'desc'));
         // Paginator
         $adapter = new DoctrineORMAdapter($queryBuilder);
         $pagerfanta = new Pagerfanta($adapter);
-        $pagerfanta->setMaxPerPage($request->get('pcg_show' , 10));
+        $pagerfanta->setMaxPerPage($request->get('pcg_show', 10));
 
         try {
             $pagerfanta->setCurrentPage($request->get('pcg_page', 1));
         } catch (\Pagerfanta\Exception\OutOfRangeCurrentPageException $ex) {
             $pagerfanta->setCurrentPage(1);
         }
-        
+
         $entities = $pagerfanta->getCurrentPageResults();
 
         // Paginator - route generator
         $me = $this;
-        $routeGenerator = function($page) use ($me, $request)
-        {
+        $routeGenerator = function ($page) use ($me, $request) {
             $requestParams = $request->query->all();
             $requestParams['pcg_page'] = $page;
             return $me->generateUrl('emmision', $requestParams);
@@ -106,13 +131,13 @@ class EmmisionController extends Controller
 
         return array($entities, $pagerHtml);
     }
-    
-    
-    
+
+
     /*
      * Calculates the total of records string
      */
-    protected function getTotalOfRecordsString($queryBuilder, $request) {
+    protected function getTotalOfRecordsString($queryBuilder, $request)
+    {
         $totalOfRecords = $queryBuilder->select('COUNT(e.id)')->getQuery()->getSingleScalarResult();
         $show = $request->get('pcg_show', 10);
         $page = $request->get('pcg_page', 1);
@@ -125,8 +150,7 @@ class EmmisionController extends Controller
         }
         return "Showing $startRecord - $endRecord of $totalOfRecords Records.";
     }
-    
-    
+
 
     /**
      * Displays a form to create a new Emmision entity.
@@ -136,9 +160,9 @@ class EmmisionController extends Controller
      */
     public function newAction(Request $request)
     {
-    
+
         $emmision = new Emmision();
-        $form   = $this->createForm('AppBundle\Form\EmmisionType', $emmision);
+        $form = $this->createForm('AppBundle\Form\EmmisionType', $emmision);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -148,19 +172,19 @@ class EmmisionController extends Controller
             $service->setEmmision($emmision);
             $em->persist($service);
             $em->flush();
-            
+
             $editLink = $this->generateUrl('emmision_edit', array('id' => $emmision->getId()));
-            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New emmision was created successfully.</a>" );
-            
-            $nextAction=  $request->get('submit') == 'save' ? 'emmision' : 'emmision_new';
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New emmision was created successfully.</a>");
+
+            $nextAction = $request->get('submit') == 'save' ? 'emmision' : 'emmision_new';
             return $this->redirectToRoute($nextAction);
         }
         return $this->render('emmision/new.html.twig', array(
             'emmision' => $emmision,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
-    
+
 
     /**
      * Finds and displays a Emmision entity.
@@ -176,8 +200,7 @@ class EmmisionController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    
-    
+
 
     /**
      * Displays a form to edit an existing Emmision entity.
@@ -195,7 +218,7 @@ class EmmisionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($emmision);
             $em->flush();
-            
+
             $this->get('session')->getFlashBag()->add('success', 'Edited Successfully!');
             return $this->redirectToRoute('emmision_edit', array('id' => $emmision->getId()));
         }
@@ -205,8 +228,7 @@ class EmmisionController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    
-    
+
 
     /**
      * Deletes a Emmision entity.
@@ -216,7 +238,7 @@ class EmmisionController extends Controller
      */
     public function deleteAction(Request $request, Emmision $emmision)
     {
-    
+
         $form = $this->createDeleteForm($emmision);
         $form->handleRequest($request);
 
@@ -228,10 +250,10 @@ class EmmisionController extends Controller
         } else {
             $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Emmision');
         }
-        
+
         return $this->redirectToRoute('emmision');
     }
-    
+
     /**
      * Creates a form to delete a Emmision entity.
      *
@@ -244,19 +266,19 @@ class EmmisionController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('emmision_delete', array('id' => $emmision->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
-    
+
     /**
      * Delete Emmision by id
      *
      * @Route("/delete/{id}", name="emmision_by_id_delete")
      * @Method("GET")
      */
-    public function deleteByIdAction(Emmision $emmision){
+    public function deleteByIdAction(Emmision $emmision)
+    {
         $em = $this->getDoctrine()->getManager();
-        
+
         try {
             $em->remove($emmision);
             $em->flush();
@@ -268,13 +290,13 @@ class EmmisionController extends Controller
         return $this->redirect($this->generateUrl('emmision'));
 
     }
-    
+
 
     /**
-    * Bulk Action
-    * @Route("/bulk-action/", name="emmision_bulk_action")
-    * @Method("POST")
-    */
+     * Bulk Action
+     * @Route("/bulk-action/", name="emmision_bulk_action")
+     * @Method("POST")
+     */
     public function bulkAction(Request $request)
     {
         $ids = $request->get("ids", array());
@@ -300,6 +322,6 @@ class EmmisionController extends Controller
 
         return $this->redirect($this->generateUrl('emmision'));
     }
-    
+
 
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ asset('css/phones.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <style>
+        .titre {
+            margin-left: 30%;
+            font-size: 20px;
+        }
+
+        .question {
+            margin-left: 10%;
+            font-size: 20px;
+        }
+        .suivant {
+            margin-left: 27%;
+            font-size: 20px;
+        }
+
+        .titre3 {
+            margin-left: 2%;
+            font-size: 25px;
+            color: #e50073;
+        }
+
+        .titre2 {
+            color: #e50073;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="marvel-device note8">
+    <div class="inner"></div>
+    <div class="overflow">
+        <div class="shadow"></div>
+    </div>
+    <div class="speaker"></div>
+    <div class="sensors"></div>
+    <div class="more-sensors"></div>
+    <div class="sleep"></div>
+    <div class="volume"></div>
+    <div class="camera"></div>
+    <div class="screen" style="background-image: url('{{ asset('images/bg.jpg') }}') !important;">
+        <div id="app">
+
+            <v-layout>
+                <v-container fluid grid-list-x2>
+                    <v-layout row justify-space-between>
+
+                        <v-flex md12>
+
+                            <img class="ml-5" src="{{ asset('images/logo.png') }}"></img>
+
+                        </v-flex>
+
+                    </v-layout>
+                    <v-layout row justify-space-between>
+                        <v-flex md12>
+                            <p class=" mt-5 titre"> Bienvenue a <span class="titre2">{{ libelle }}</span></p>
+                        </v-flex>
+
+                    </v-layout>
+
+                    <v-layout row justify-space-between>
+                        <v-flex md12>
+                            <p class=" mt-5 titre3"> REPONDEZ AUX QUESTIONS</p>
+                        </v-flex>
+
+                    </v-layout>
+
+                    <v-layout row justify-space-between>
+                        <v-flex md12>
+                            <p class=" mt-5 question">{{ question }}</p>
+                        </v-flex>
+
+                    </v-layout>
+
+                    <v-layout row justify-center>
+                        <v-flex md6>
+                            <v-btn color="rgba(229, 0, 115, 0.38)">{{ prop1 }}</v-btn>
+                        </v-flex>
+                        <v-flex md6>
+                            <v-btn color="#e50073">{{ prop2 }}</v-btn>
+                        </v-flex>
+                    </v-layout>
+
+                    <v-layout row justify-space-between>
+
+                        <v-flex md12>
+                            <v-btn class=" mt-5 suivant" color="#e50073">SUIVANT</v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-layout>
+
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: () => ({}),
+        methods: {}
+    })
+    Vue.use(Vuetify)
+</script>
+</html>

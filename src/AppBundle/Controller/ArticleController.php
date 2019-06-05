@@ -33,7 +33,13 @@ class ArticleController extends Controller
 
         list($filterForm, $queryBuilder) = $this->filter($queryBuilder, $request);
         list($articles, $pagerHtml) = $this->paginator($queryBuilder, $request);
-        
+        foreach ($articles as $article) {
+            $json = $article->getJsonConfig();
+
+            $article->setJsonConfig(json_encode($json));
+        }
+//dump($articles);
+//die;
         $totalOfRecordsString = $this->getTotalOfRecordsString($queryBuilder, $request);
 
         return $this->render('article/index.html.twig', array(
@@ -47,9 +53,9 @@ class ArticleController extends Controller
 
 
     /**
-    * Create filter form and process filter request.
-    *
-    */
+     * Create filter form and process filter request.
+     *
+     */
     protected function filter($queryBuilder, $request)
     {
         $filterForm = $this->createForm('AppBundle\Form\ArticleFilterType');
@@ -59,38 +65,37 @@ class ArticleController extends Controller
 
         if ($filterForm->isValid()) {
             // Build the query from the given form object
-            $this->get('petkopara_multi_search.builder')->searchForm( $queryBuilder, $filterForm->get('search'));
+            $this->get('petkopara_multi_search.builder')->searchForm($queryBuilder, $filterForm->get('search'));
         }
 
         return array($filterForm, $queryBuilder);
     }
 
     /**
-    * Get results from paginator and get paginator view.
-    *
-    */
+     * Get results from paginator and get paginator view.
+     *
+     */
     protected function paginator($queryBuilder, Request $request)
     {
         //sorting
-        $sortCol = $queryBuilder->getRootAlias().'.'.$request->get('pcg_sort_col', 'id');
+        $sortCol = $queryBuilder->getRootAlias() . '.' . $request->get('pcg_sort_col', 'id');
         $queryBuilder->orderBy($sortCol, $request->get('pcg_sort_order', 'desc'));
         // Paginator
         $adapter = new DoctrineORMAdapter($queryBuilder);
         $pagerfanta = new Pagerfanta($adapter);
-        $pagerfanta->setMaxPerPage($request->get('pcg_show' , 10));
+        $pagerfanta->setMaxPerPage($request->get('pcg_show', 10));
 
         try {
             $pagerfanta->setCurrentPage($request->get('pcg_page', 1));
         } catch (\Pagerfanta\Exception\OutOfRangeCurrentPageException $ex) {
             $pagerfanta->setCurrentPage(1);
         }
-        
+
         $entities = $pagerfanta->getCurrentPageResults();
 
         // Paginator - route generator
         $me = $this;
-        $routeGenerator = function($page) use ($me, $request)
-        {
+        $routeGenerator = function ($page) use ($me, $request) {
             $requestParams = $request->query->all();
             $requestParams['pcg_page'] = $page;
             return $me->generateUrl('article', $requestParams);
@@ -106,13 +111,13 @@ class ArticleController extends Controller
 
         return array($entities, $pagerHtml);
     }
-    
-    
-    
+
+
     /*
      * Calculates the total of records string
      */
-    protected function getTotalOfRecordsString($queryBuilder, $request) {
+    protected function getTotalOfRecordsString($queryBuilder, $request)
+    {
         $totalOfRecords = $queryBuilder->select('COUNT(e.id)')->getQuery()->getSingleScalarResult();
         $show = $request->get('pcg_show', 10);
         $page = $request->get('pcg_page', 1);
@@ -125,8 +130,7 @@ class ArticleController extends Controller
         }
         return "Showing $startRecord - $endRecord of $totalOfRecords Records.";
     }
-    
-    
+
 
     /**
      * Displays a form to create a new Article entity.
@@ -136,31 +140,35 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
-    
+
         $article = new Article();
-        $form   = $this->createForm('AppBundle\Form\ArticleType', $article);
+        $form = $this->createForm('AppBundle\Form\ArticleType', $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $json = $article->getJsonConfig();
+//            dump($json);
+            $article->setJsonConfig(json_decode($json, true));
+//            dump($article);die;
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $service = new Service();
             $service->setArticle($article);
             $em->persist($service);
             $em->flush();
-            
+
             $editLink = $this->generateUrl('article_edit', array('id' => $article->getId()));
-            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New article was created successfully.</a>" );
-            
-            $nextAction=  $request->get('submit') == 'save' ? 'article' : 'article_new';
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New article was created successfully.</a>");
+
+            $nextAction = $request->get('submit') == 'save' ? 'article' : 'article_new';
             return $this->redirectToRoute($nextAction);
         }
         return $this->render('article/new.html.twig', array(
             'article' => $article,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
-    
+
 
     /**
      * Finds and displays a Article entity.
@@ -170,14 +178,16 @@ class ArticleController extends Controller
      */
     public function showAction(Article $article)
     {
+        $json = $article->getJsonConfig();
+
+        $article->setJsonConfig(json_encode($json));
         $deleteForm = $this->createDeleteForm($article);
         return $this->render('article/show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    
-    
+
 
     /**
      * Displays a form to edit an existing Article entity.
@@ -187,15 +197,20 @@ class ArticleController extends Controller
      */
     public function editAction(Request $request, Article $article)
     {
+        $json = $article->getJsonConfig();
+        $article->setJsonConfig(json_encode($json));
         $deleteForm = $this->createDeleteForm($article);
         $editForm = $this->createForm('AppBundle\Form\ArticleType', $article);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $json = $article->getJsonConfig();
+
+            $article->setJsonConfig(json_decode($json, true));
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
-            
+
             $this->get('session')->getFlashBag()->add('success', 'Edited Successfully!');
             return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
         }
@@ -205,8 +220,7 @@ class ArticleController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    
-    
+
 
     /**
      * Deletes a Article entity.
@@ -216,7 +230,7 @@ class ArticleController extends Controller
      */
     public function deleteAction(Request $request, Article $article)
     {
-    
+
         $form = $this->createDeleteForm($article);
         $form->handleRequest($request);
 
@@ -228,10 +242,10 @@ class ArticleController extends Controller
         } else {
             $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Article');
         }
-        
+
         return $this->redirectToRoute('article');
     }
-    
+
     /**
      * Creates a form to delete a Article entity.
      *
@@ -244,19 +258,19 @@ class ArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('article_delete', array('id' => $article->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
-    
+
     /**
      * Delete Article by id
      *
      * @Route("/delete/{id}", name="article_by_id_delete")
      * @Method("GET")
      */
-    public function deleteByIdAction(Article $article){
+    public function deleteByIdAction(Article $article)
+    {
         $em = $this->getDoctrine()->getManager();
-        
+
         try {
             $em->remove($article);
             $em->flush();
@@ -268,13 +282,13 @@ class ArticleController extends Controller
         return $this->redirect($this->generateUrl('article'));
 
     }
-    
+
 
     /**
-    * Bulk Action
-    * @Route("/bulk-action/", name="article_bulk_action")
-    * @Method("POST")
-    */
+     * Bulk Action
+     * @Route("/bulk-action/", name="article_bulk_action")
+     * @Method("POST")
+     */
     public function bulkAction(Request $request)
     {
         $ids = $request->get("ids", array());
@@ -300,6 +314,6 @@ class ArticleController extends Controller
 
         return $this->redirect($this->generateUrl('article'));
     }
-    
+
 
 }

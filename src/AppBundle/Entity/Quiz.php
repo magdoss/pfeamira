@@ -165,14 +165,6 @@ class Quiz
     }
 
 
-
-
-
-
-
-
-
-
     /**
      * Add question
      *

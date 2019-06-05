@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 02 juin 2019 à 23:54
+-- Généré le :  mer. 05 juin 2019 à 22:32
 -- Version du serveur :  5.7.24
 -- Version de PHP :  5.6.40
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `short_code_id` int(11) DEFAULT NULL,
   `libelle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8_unicode_ci,
-  `jsonConfig` longtext COLLATE utf8_unicode_ci COMMENT '(DC2Type:json_array)',
+  `jsonConfig` longtext COLLATE utf8_unicode_ci COMMENT '(DC2Type:array)',
   `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_creation` date NOT NULL,
@@ -43,14 +43,15 @@ CREATE TABLE IF NOT EXISTS `article` (
   `price` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_23A0E668C7B29BF` (`short_code_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
 INSERT INTO `article` (`id`, `short_code_id`, `libelle`, `description`, `jsonConfig`, `keyword`, `is_active`, `date_creation`, `date_debut`, `date_fin`, `price`) VALUES
-(5, 3, 'article 2', 'gefgdfg', '\"{ \\\"menu\\\": [ {\\\"key\\\":\\\"steps\\\",\\\"value\\\":\\\"\\u00e9tape\\\"}, {\\\"key\\\":\\\"ingredients\\\",\\\"value\\\":\\\"ingr\\u00e9dients\\\"}, {\\\"key\\\":\\\"value\\\",\\\"value\\\":\\\"valeur nutritive\\\"}, {\\\"key\\\":\\\"vdo\\\",\\\"value\\\":\\\"vid\\u00e9o\\\"} ], \\\"steps\\\":[ { \\\"title\\\":\\\"etape 1\\\", \\\"subTitle\\\":\\\"02:00 min\\\", \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum\\\" },{ \\\"title\\\":\\\"etape 2\\\", \\\"subTitle\\\":\\\"04:00 min\\\", \\\"content\\\":\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod .\\\" }], \\\"menu Key\\\": [{},{},{}] }\"', 'a', 1, '2019-06-02', '2019-06-02', '2019-06-02', 1300);
+(5, 3, 'article 2', 'gefgdfg', NULL, 'a', 1, '2019-06-02', '2019-06-02', '2019-06-02', 1300),
+(6, 2, 'hjk', 'iolk', 'a:3:{s:4:\"menu\";a:4:{i:0;a:2:{s:3:\"key\";s:5:\"steps\";s:5:\"value\";s:6:\"étape\";}i:1;a:2:{s:3:\"key\";s:11:\"ingredients\";s:5:\"value\";s:12:\"ingrédients\";}i:2;a:2:{s:3:\"key\";s:5:\"value\";s:5:\"value\";s:16:\"valeur nutritive\";}i:3;a:2:{s:3:\"key\";s:3:\"vdo\";s:5:\"value\";s:6:\"vidéo\";}}s:5:\"steps\";a:2:{i:0;a:3:{s:5:\"title\";s:7:\"etape 1\";s:8:\"subTitle\";s:9:\"02:00 min\";s:7:\"content\";s:444:\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum\";}i:1;a:3:{s:5:\"title\";s:7:\"etape 2\";s:8:\"subTitle\";s:9:\"04:00 min\";s:7:\"content\";s:73:\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod .\";}}s:8:\"menu Key\";a:3:{i:0;a:0:{}i:1;a:0:{}i:2;a:0:{}}}', 'ujk', 0, '2019-06-04', '2019-06-04', '2019-06-04', 1300);
 
 -- --------------------------------------------------------
 
@@ -115,14 +116,15 @@ CREATE TABLE IF NOT EXISTS `image` (
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045F7294869C` (`article_id`),
   KEY `IDX_C53D045FA775319F` (`emmision_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
 --
 
 INSERT INTO `image` (`id`, `article_id`, `name`, `emmision_id`) VALUES
-(6, NULL, '1e05069006cf0ea8e2f6c864f642ed4d277e4ea4.jpeg', 2);
+(6, NULL, '1e05069006cf0ea8e2f6c864f642ed4d277e4ea4.jpeg', 2),
+(7, NULL, '610f326cfde2f0fc50b5a200192990f29cad9751.jpeg', 2);
 
 -- --------------------------------------------------------
 
@@ -186,7 +188,14 @@ CREATE TABLE IF NOT EXISTS `question` (
   `reponse_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_B6F7494ECF18BB82` (`reponse_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `question`
+--
+
+INSERT INTO `question` (`id`, `lang`, `question`, `prop1`, `prop2`, `isPropOneCorrect`, `pointToAdd`, `pointToSubIfFail`, `reponse_id`) VALUES
+(5, 'fr', 'La tunisie appartient au continent ?', 'Asiatique', 'Africain', 1, 10, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -208,7 +217,8 @@ CREATE TABLE IF NOT EXISTS `question_quiz` (
 --
 
 INSERT INTO `question_quiz` (`question_id`, `quiz_id`) VALUES
-(4, 3);
+(4, 3),
+(5, 4);
 
 -- --------------------------------------------------------
 
@@ -274,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `service` (
   UNIQUE KEY `UNIQ_E19D9AD27294869C` (`article_id`),
   UNIQUE KEY `UNIQ_E19D9AD2853CD175` (`quiz_id`),
   UNIQUE KEY `UNIQ_E19D9AD2A775319F` (`emmision_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `service`
@@ -283,7 +293,8 @@ CREATE TABLE IF NOT EXISTS `service` (
 INSERT INTO `service` (`id`, `article_id`, `quiz_id`, `emmision_id`) VALUES
 (8, NULL, NULL, 2),
 (9, 5, NULL, NULL),
-(10, NULL, 4, NULL);
+(10, NULL, 4, NULL),
+(11, 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -362,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'admin', 'admin', 'admin@admin.tn', 'admin@admin.tn', 1, NULL, '$2y$13$4.PQOhme/v3k9jBT5W7MKOz3p5KNUEf/.U2aY/K8Cb4VPL.LIFK2W', '2019-05-26 14:51:37', NULL, NULL, 'a:0:{}'),
+(1, 'admin', 'admin', 'admin@admin.tn', 'admin@admin.tn', 1, NULL, '$2y$13$4.PQOhme/v3k9jBT5W7MKOz3p5KNUEf/.U2aY/K8Cb4VPL.LIFK2W', '2019-06-05 13:43:51', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
 (2, 'amira', 'amira', 'amira@amira.tn', 'amira@amira.tn', 1, NULL, '$2y$13$XRPMDKWT8FeJxRlAGybhI.2OkmOnRMk.QDr0KStQAL/G8q41szYZi', '2019-06-01 14:30:18', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
 
 -- --------------------------------------------------------

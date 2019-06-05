@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ asset('css/phones.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <style>
+
+        .suivant {
+            direction: rtl;
+            margin-left: 20%;
+            font-size: 20px;
+            background-color: #1919708c;
+            color: white;
+        }
+        .price{
+            font-size: 15px;
+            color: yellow;
+        }
+
+        .flex {
+            margin-top: 150%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="marvel-device note8">
+    <div class="inner"></div>
+    <div class="overflow">
+        <div class="shadow"></div>
+    </div>
+    <div class="speaker"></div>
+    <div class="sensors"></div>
+    <div class="more-sensors"></div>
+    <div class="sleep"></div>
+    <div class="volume"></div>
+    <div class="camera"></div>
+    <div class="screen" style="background-image: url('{{ asset('uploads/images/'~ img) }}') !important;">
+        <div id="app">
+
+            <v-layout>
+                <v-container fluid grid-list-x2>
+
+                    <v-layout row justify-space-between>
+
+                        <v-flex md12 class="flex">
+                            <p class=" mt-5 suivant"><span> ابعث SMS </span>
+                                <span> إكتب فيه </span><span> {{ keyword }} </span>
+                                <span> على الرقم</span><span> {{ shortCode }}</span>
+                                <br>
+                                <span class="price">سعر الخدمة</span><span class="price"> {{ prix }}</span> <span class="price">مليم</span>
+                            </p>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-layout>
+
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: () => ({}),
+        methods: {}
+    })
+    Vue.use(Vuetify)
+</script>
+</html>

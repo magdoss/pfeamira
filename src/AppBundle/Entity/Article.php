@@ -27,7 +27,7 @@ class Article
     /**
      * @var array
      *
-     * @ORM\Column(name="jsonConfig", type="json_array", nullable=true)
+     * @ORM\Column(name="jsonConfig", type="array", nullable=true)
      */
     private $jsonConfig;
     /**
