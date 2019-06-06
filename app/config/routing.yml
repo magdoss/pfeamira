@@ -11,6 +11,11 @@ app_reponse_api:
     type:   rest
     prefix:   /api
 
+app_question_api:
+    resource: "@AppBundle/Controller/QuestionRESTController.php"
+    type:   rest
+    prefix:   /api
+
 app_article_api:
     resource: "@AppBundle/Controller/ArticleRESTController.php"
     type:   rest
